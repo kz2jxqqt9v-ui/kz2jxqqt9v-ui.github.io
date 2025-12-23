@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="배달 라이더스 - 고객 지원 센터">
+    <title>배달 라이더스 - 고객 지원</title>
+    <style>
+        /* ===== Dashboard.css 디자인 시스템 적용 ===== */
+        :root {
+            /* 색상 변수 */
+            --color-white: rgba(255, 255, 255, 1);
+            --color-cream-50: rgba(245, 230, 211, 1);
+            --color-cream-100: rgba(255, 248, 240, 1);
+            --color-gray-200: rgba(245, 245, 245, 1);
+            --color-gray-300: rgba(167, 169, 169, 1);
+            --color-slate-500: rgba(98, 108, 113, 1);
+            --color-brown-600: rgba(44, 44, 44, 1);
+            --color-slate-900: rgba(44, 44, 44, 1);
+            --color-coral-300: rgba(255, 138, 101, 1);
+            --color-coral-400: rgba(255, 107, 107, 1);
+            --color-coral-500: rgba(239, 83, 80, 1);
+            --color-coral-600: rgba(229, 62, 62, 1);
+            --color-coral-700: rgba(220, 38, 38, 1);
+            --color-orange-400: rgba(255, 179, 71, 1);
+            --color-red-500: rgba(239, 83, 80, 1);
+            --color-brown-600-rgb: 44, 44, 44;
+            --color-coral-500-rgb: 239, 83, 80;
+            
+            --color-background: var(--color-cream-50);
+            --color-surface: var(--color-cream-100);
+            --color-text: var(--color-slate-900);
+            --color-text-secondary: var(--color-slate-500);
+            --color-primary: var(--color-coral-500);
+            --color-primary-hover: var(--color-coral-600);
+            --color-primary-active: var(--color-coral-700);
+            --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+            --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-btn-primary-text: var(--color-cream-50);
+            --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+            --color-error: var(--color-red-500);
+            --color-warning: var(--color-orange-400);
+            --color-success: rgba(34, 197, 94, 1);
+            
+            /* 폰트 */
+            --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-size-xs: 11px;
+            --font-size-sm: 12px;
+            --font-size-base: 14px;
+            --font-size-md: 14px;
+            --font-size-lg: 16px;
+            --font-size-xl: 18px;
+            --font-size-2xl: 20px;
+            --font-size-3xl: 24px;
+            --font-size-4xl: 30px;
+            --font-weight-normal: 400;
+            --font-weight-medium: 500;
+            --font-weight-semibold: 550;
+            --font-weight-bold: 600;
+            --line-height-tight: 1.2;
+            --line-height-normal: 1.5;
+            --letter-spacing-tight: -0.01em;
+            
+            /* 간격 */
+            --space-4: 4px;
+            --space-6: 6px;
+            --space-8: 8px;
+            --space-10: 10px;
+            --space-12: 12px;
+            --space-16: 16px;
+            --space-20: 20px;
+            --space-24: 24px;
+            --space-32: 32px;
+            
+            /* 라운드 */
+            --radius-sm: 6px;
+            --radius-base: 8px;
+            --radius-md: 10px;
+            --radius-lg: 12px;
+            --radius-full: 9999px;
+            
+            /* 그림자 */
+            --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+            
+            /* 트랜지션 */
+            --duration-fast: 150ms;
+            --duration-normal: 250ms;
+            --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        /* 다크모드 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-gray-400-rgb: 119, 124, 124;
+                --color-coral-300-rgb: 255, 138, 101;
+                --color-gray-300-rgb: 167, 169, 169;
+                --color-gray-200-rgb: 245, 245, 245;
+                --color-charcoal-700: rgba(31, 33, 33, 1);
+                --color-charcoal-800: rgba(38, 40, 40, 1);
+                
+                --color-background: var(--color-charcoal-700);
+                --color-surface: var(--color-charcoal-800);
+                --color-text: var(--color-gray-200);
+                --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+                --color-primary: var(--color-coral-300);
+                --color-primary-hover: var(--color-coral-400);
+                --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+                --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+                --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+                --color-btn-primary-text: var(--color-slate-900);
+                --color-card-border: rgba(var(--color-gray-400-rgb), 0.2);
+            }
+        }
+        
+        /* 기본 스타일 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            font-size: var(--font-size-base);
+            font-family: var(--font-family-base);
+            line-height: var(--line-height-normal);
+            color: var(--color-text);
+            background-color: var(--color-background);
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            margin: 0;
+            font-weight: var(--font-weight-semibold);
+            line-height: var(--line-height-tight);
+            color: var(--color-text);
+            letter-spacing: var(--letter-spacing-tight);
+        }
+        
+        h1 { font-size: var(--font-size-4xl); }
+        h2 { font-size: var(--font-size-3xl); }
+        h3 { font-size: var(--font-size-2xl); }
+        h4 { font-size: var(--font-size-xl); }
+        
+        a {
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: color var(--duration-fast) var(--ease-standard);
+        }
+        
+        a:hover {
+            color: var(--color-primary-hover);
+        }
+        
+        /* 레이아웃 */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 var(--space-16);
+        }
+        
+        /* 헤더 */
+        .header {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
+            color: var(--color-btn-primary-text);
+            padding: var(--space-24) var(--space-16);
+            margin-bottom: var(--space-32);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: var(--font-size-4xl);
+            margin-bottom: var(--space-8);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-btn-primary-text);
+        }
+        
+        .header p {
+            font-size: var(--font-size-xl);
+            opacity: 0.95;
+            color: var(--color-btn-primary-text);
+        }
+        
+        /* 카드 그리드 */
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-20);
+            margin-bottom: var(--space-32);
+        }
+        
+        .card {
+            background-color: var(--color-surface);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-card-border);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: box-shadow var(--duration-normal) var(--ease-standard);
+            padding: var(--space-24);
+        }
+        
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+        
+        .card h2 {
+            color: var(--color-primary);
+            margin-bottom: var(--space-16);
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-semibold);
+        }
+        
+        .card p, .card li {
+            color: var(--color-text);
+            line-height: 1.7;
+            margin-bottom: var(--space-12);
+            font-size: var(--font-size-md);
+        }
+        
+        .card ul {
+            margin-left: var(--space-20);
+            margin-top: var(--space-12);
+        }
+        
+        /* 버튼 */
+        .email-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-12) var(--space-20);
+            background: var(--color-primary);
+            color: var(--color-btn-primary-text);
+            border-radius: var(--radius-base);
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-md);
+            transition: all var(--duration-normal) var(--ease-standard);
+            border: none;
+            text-decoration: none;
+            margin-top: var(--space-12);
+            cursor: pointer;
+        }
+        
+        .email-link:hover {
+            background: var(--color-primary-hover);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .info-badge {
+            display: inline-block;
+            background: var(--color-secondary);
+            padding: var(--space-6) var(--space-12);
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            margin-top: var(--space-12);
+            font-weight: var(--font-weight-medium);
+        }
+        
+        /* 약관 섹션 */
+        .terms-section {
+            background: var(--color-surface);
+            padding: var(--space-32);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--space-32);
+            border: 1px solid var(--color-card-border);
+        }
+        
+        .terms-section h2 {
+            color: var(--color-primary);
+            margin-bottom: var(--space-24);
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-semibold);
+        }
+        
+        .terms-item {
+            margin-bottom: var(--space-24);
+            padding-bottom: var(--space-24);
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .terms-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .terms-item h3 {
+            color: var(--color-text);
+            margin-bottom: var(--space-16);
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-semibold);
+        }
+        
+        .terms-item p {
+            color: var(--color-text);
+            line-height: 1.8;
+            font-size: var(--font-size-md);
+            margin-bottom: var(--space-12);
+        }
+        
+        .terms-item ul, .terms-item ol {
+            color: var(--color-text);
+            margin-left: var(--space-24);
+            margin-top: var(--space-12);
+            margin-bottom: var(--space-12);
+        }
+        
+        .terms-item li {
+            margin-bottom: var(--space-8);
+            line-height: 1.7;
+        }
+        
+        .warning-text {
+            color: var(--color-error);
+            font-weight: var(--font-weight-medium);
+            margin-top: var(--space-12);
+            padding: var(--space-12);
+            background: rgba(var(--color-coral-500-rgb), 0.1);
+            border-radius: var(--radius-base);
+            border-left: 3px solid var(--color-error);
+        }
+        
+        /* 탭 네비게이션 */
+        .tab-container {
+            margin-bottom: var(--space-32);
+        }
+        
+        .tab-buttons {
+            display: flex;
+            gap: var(--space-12);
+            margin-bottom: var(--space-20);
+            flex-wrap: wrap;
+        }
+        
+        .tab-button {
+            padding: var(--space-12) var(--space-20);
+            border: 2px solid var(--color-border);
+            background: var(--color-surface);
+            color: var(--color-text);
+            border-radius: var(--radius-base);
+            cursor: pointer;
+            font-weight: var(--font-weight-medium);
+            font-size: var(--font-size-md);
+            transition: all var(--duration-fast) var(--ease-standard);
+        }
+        
+        .tab-button:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+        
+        .tab-button.active {
+            background: var(--color-primary);
+            color: var(--color-btn-primary-text);
+            border-color: var(--color-primary);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* 푸터 */
+        footer {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
+            color: var(--color-btn-primary-text);
+            text-align: center;
+            padding: var(--space-32) var(--space-16);
+            margin-top: var(--space-32);
+        }
+        
+        footer p {
+            margin-bottom: var(--space-8);
+            color: var(--color-btn-primary-text);
+            font-size: var(--font-size-md);
+        }
+        
+        footer a {
+            color: var(--color-btn-primary-text);
+            text-decoration: underline;
+        }
+        
+        footer a:hover {
+            opacity: 0.9;
+        }
+        
+        .version-info {
+            font-size: var(--font-size-sm);
+            margin-top: var(--space-16);
+            opacity: 0.85;
+        }
+        
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: var(--font-size-3xl);
+            }
+            
+            .support-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .card, .terms-section {
+                padding: var(--space-20);
+            }
+            
+            .tab-buttons {
+                flex-direction: column;
+            }
+            
+            .tab-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🚚 배달 라이더스</h1>
+        <p>고객 지원 센터</p>
+    </header>
+    
+    <div class="container">
+        <div class="support-grid">
+            <div class="card">
+                <h2>📧 고객 지원 문의</h2>
+                <p>앱 사용 중 문제가 발생하거나 궁금한 점이 있으시면 언제든지 연락주세요.</p>
+                <p><strong>이메일:</strong> dev.yds25@gmail.com</p>
+                <a href="mailto:dev.yds25@gmail.com" class="email-link">메일 보내기</a>
+                <div class="info-badge">평일 24시간 이내 답변</div>
+            </div>
+            
+            <div class="card">
+                <h2>🔐 계정 문제</h2>
+                <p><strong>비밀번호 재설정</strong></p>
+                <p>비밀번호를 잊으신 경우 dev.yds25@gmail.com으로 문의하면 가입 이메일로 임시 비밀번호를 발송해드립니다.</p>
+                <p style="margin-top: 15px;"><strong>비밀번호 정책</strong></p>
+                <ul>
+                    <li>6자 이상</li>
+                    <li>영문 대문자 1개 이상</li>
+                    <li>영문 소문자 1개 이상</li>
+                    <li>특수문자(!@#$%^&*()-+/?) 중 1개 이상</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h2>🐛 버그 신고</h2>
+                <p>앱 사용 중 오류를 발견하셨나요?</p>
+                <p>다음 정보와 함께 신고해주세요:</p>
+                <ul>
+                    <li>버그 발생 상황 설명</li>
+                    <li>발생 날짜 및 시간</li>
+                    <li>스크린샷 (가능한 경우)</li>
+                </ul>
+                <a href="mailto:dev.yds25@gmail.com?subject=[버그신고] 배달 라이더스" class="email-link">버그 신고하기</a>
+            </div>
+        </div>
+        
+        <!-- 탭 네비게이션 -->
+        <div class="tab-container">
+            <div class="tab-buttons">
+                <button class="tab-button active" onclick="switchTab(event, 'faq')">자주 묻는 질문</button>
+                <button class="tab-button" onclick="switchTab(event, 'privacy')">개인정보처리방침</button>
+            </div>
+        </div>
+        
+        <!-- FAQ 탭 -->
+        <div id="faq" class="tab-content active">
+            <div class="terms-section">
+                <h2>❓ 자주 묻는 질문 (FAQ)</h2>
+                
+                <div class="terms-item">
+                    <h3>Q1. 앱 설치는 어떻게 하나요?</h3>
+                    <p><strong>iOS:</strong> App Store에서 "배달 라이더스" 검색 후 다운로드</p>
+                </div>
+                
+                <div class="terms-item">
+                    <h3>Q2. 내 데이터는 안전한가요?</h3>
+                    <p>모든 개인정보는 개인정보 보호법에 따라 안전하게 관리됩니다. 자세한 내용은 개인정보처리방침을 확인해주세요.</p>
+                </div>
+                
+                <div class="terms-item">
+                    <h3>Q3. 수익 통계가 정확한가요?</h3>
+                    <p>모든 수익 데이터는 사용자가 직접 입력한 정보를 기반으로 계산됩니다. 정확한 통계를 위해 배달 완료 후 즉시 입력하시는 것을 권장합니다.</p>
+                </div>
+                
+                <div class="terms-item">
+                    <h3>Q4. 회원 탈퇴는 어떻게 하나요?</h3>
+                    <p>앱 내 <strong>설정 → 계정 관리 → 회원 탈퇴</strong> 메뉴에서 탈퇴를 진행할 수 있습니다. 탈퇴 시 모든 개인정보는 즉시 파기되며, 복구가 불가능합니다.</p>
+                    <p class="warning-text">⚠️ 관련 법령에 따라 보관 의무가 있는 정보(거래 기록 등)는 해당 법령에서 정한 기간 동안 보관 후 파기됩니다.</p>
+                </div>
+                
+                <div class="terms-item">
+                    <h3>Q5. 비밀번호를 잊어버렸어요.</h3>
+                    <p>dev.yds25@gmail.com으로 계정 복구를 요청하시면 가입 시 등록한 이메일로 임시 비밀번호를 발송해드립니다. 본인 확인을 위해 가입 이메일을 요청할 수 있습니다.</p>
+                </div>
+                
+                <div class="terms-item">
+                    <h3>Q6. 채팅 기능에서 부적절한 메시지를 받았어요.</h3>
+                    <p>채팅 화면에서 해당 메시지를 신고할 수 있습니다. 24시간 내 10회 이상 신고를 받은 회원은 자동으로 채팅이 제한됩니다.</p>
+                </div>
+                
+                <div class="terms-item">
+                    <h3>Q7. 기능 추가 요청이 있어요.</h3>
+                    <p>좋은 의견 감사합니다! dev.yds25@gmail.com으로 기능 제안을 보내주시면 검토 후 추후 업데이트에 반영하겠습니다.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 개인정보처리방침 탭 -->
+        <div id="privacy" class="tab-content">
+            <div class="terms-section">
+                <h2>🔒 개인정보처리방침</h2>
+                
+                <div class="terms-item">
+                    <h3>1. 수집하는 개인정보</h3>
+                    <p>배달 라이더스는 다음의 개인정보를 수집합니다:</p>
+                    <ul>
+                        <li><strong>필수 정보:</strong> 이메일, 비밀번호</li>
+                        <li><strong>선택 정보:</strong> 프로필 사진</li>
+                        <li><strong>서비스 이용 정보:</strong> 배달 기록, 수익 데이터, 접속 로그</li>
+                        <li><strong>기기 정보:</strong> 기기 OS, 앱 버전, 광고 식별자</li>
+                    </ul>
+                </div>
+                
+                <div class="terms-item">
+                    <h3>2. 개인정보 수집 방법</h3>
+                    <ul>
+                        <li>회원가입 시 직접 입력</li>
+                        <li>앱 사용 과정에서 자동 수집</li>
+                        <li>Google AdMob 등 광고 플랫폼을 통한 수집</li>
+                    </ul>
+                </div>
+                
+                <div class="terms-item">
+                    <h3>3. 개인정보의 이용</h3>
+                    <p>수집된 개인정보는 다음의 목적으로 이용됩니다:</p>
+                    <ul>
+                        <li>회원 인증 및 계정 관리</li>
+                        <li>서비스 제공 및 기능 개선</li>
+                        <li>통계 분석 및 서비스 최적화</li>
+                        <li>맞춤형 광고 제공</li>
+                        <li>보안 및 부정행위 방지</li>
+                    </ul>
+                </div>
+                
+                <div class="terms-item">
+                    <h3>4. 개인정보의 보유 및 이용기간</h3>
+                    <p><strong>원칙:</strong> 회원 탈퇴 시 즉시 파기</p>
+                    <p><strong>예외 - 관계 법령에 의한 정보 보유:</strong></p>
+                    <ul>
+                        <li>계약 또는 청약철회 기록: 5년 (전자상거래법)</li>
+                        <li>대금결제 및 재화공급 기록: 5년 (전자상거래법)</li>
+                        <li>소비자 분쟁처리 기록: 3년 (전자상거래법)</li>
+                        <li>전자금융 거래 기록: 5년 (전자금융거래법)</li>
+                        <li>웹사이트 방문 기록: 3개월 (통신비밀보호법)</li>
+                    </ul>
+                </div>
+                
+                <div class="terms-item">
+                    <h3>5. 개인정보의 제3자 제공</h3>
+                    <p>운영자는 원칙적으로 회원의 개인정보를 제3자에게 제공하지 않습니다.</p>
+                    <p><strong>예외:</strong></p>
+                    <ul>
+                        <li>회원이 사전에 동의한 경우</li>
+                        <li>법령의 규정에 의하거나 수사기관의 요구가 있는 경우</li>
+                    </ul>
+                </div>
+                
+                <div class="terms-item">
+                    <h3>6. 광고 및 분석 도구 이용</h3>
+                    <p>운영자는 서비스 내 맞춤형 광고 제공 및 분석을 위해 Google AdMob 등 광고 플랫폼을 사용합니다.</p>
+                    <p>이 과정에서 광고 식별자(IDFA, ADID 등), 쿠키, 기기 정보 등이 광고 사업자에게 전송될 수 있습니다.</p>
+                    <p>회원은 단말기 OS에서 제공하는 광고 추적 제한 설정(예: iOS의 앱 추적 투명성)을 통하여 맞춤형 광고 수신을 제한할 수 있습니다.</p>
+                </div>
+                
+                <div class="terms-item">
+                    <h3>7. 개인정보의 파기 절차 및 방법</h3>
+                    <p><strong>파기 절차:</strong> 회원 탈퇴 즉시 개인정보 파기 (법령 보관 의무 제외)</p>
+                    <p><strong>파기 방법:</strong> 전자적 파일은 복구 불가능한 방법으로 영구 삭제</p>
+                </div>
+                
+                <div class="terms-item">
+                    <h3>8. 이용자의 권리와 행사 방법</h3>
+                    <p>이용자는 언제든지 다음의 권리를 행사할 수 있습니다:</p>
+                    <ul>
+                        <li>개인정보 열람 요구</li>
+                        <li>개인정보 정정·삭제 요구</li>
+                        <li>개인정보 처리정지 요구</li>
+                    </ul>
+                    <p>권리 행사는 이메일(dev.yds25@gmail.com)을 통해 요청해주세요.</p>
+                </div>
+                
+                <div class="terms-item">
+                    <h3>9. 개인정보의 안전성 확보조치</h3>
+                    <p>운영자는 개인정보의 안전성 확보를 위해 다음과 같은 조치를 취합니다:</p>
+                    <ul>
+                        <li>관리적 조치: 개인정보 처리방침 수립·시행</li>
+                        <li>기술적 조치: 개인정보 암호화, 접근통제시스템 설치</li>
+                        <li>물리적 조치: 서버 보안 설정 및 접근 제한</li>
+                    </ul>
+                </div>
+                
+                <div class="terms-item">
+                    <h3>10. 권익침해 구제방법</h3>
+                    <p>개인정보 침해로 인한 구제를 받기 위하여 다음 기관에 신청할 수 있습니다:</p>
+                    <ul>
+                        <li>개인정보 침해신고센터: privacy.kisa.or.kr</li>
+                        <li>개인정보 분쟁조정위원회: kopico.go.kr</li>
+                    </ul>
+                </div>
+                
+                <div class="terms-item">
+                    <h3>개인정보 보호책임자</h3>
+                    <p>개인정보 보호책임자: RidersAPP 개발팀</p>
+                    <p>이메일: dev.yds25@gmail.com</p>
+                    <p class="warning-text">시행일: 2025년 12월 14일</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p><strong>배달 라이더스 (RidersAPP)</strong></p>
+        <p>© 2025 YDS. All rights reserved.</p>
+        <p>문의: <a href="mailto:dev.yds25@gmail.com">dev.yds25@gmail.com</a></p>
+        <p class="version-info">최종 업데이트: 2025년 12월 18일</p>
+    </footer>
+    
+    <script>
+        function switchTab(event, tabName) {
+            event.preventDefault();
+            
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
